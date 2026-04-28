@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naitik's YouTube Thumbnail Studio - notnaitik_1m</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .logo {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 3s ease infinite, glow 2s ease-in-out infinite alternate;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .discord-tag {
+            font-size: 1.1rem;
+            color: #7289da;
+            font-weight: 600;
+        }
+
+        /* Services Section */
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
+
+        .service-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .service-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #feca57;
+            margin-bottom: 15px;
+        }
+
+        .price-special {
+            color: #48dbfb;
+            font-size: 1.4rem;
+        }
+
+        /* Order Form */
+        .order-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .order-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            color: white;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #feca57;
+            box-shadow: 0 0 20px rgba(254, 202, 87, 0.3);
+            transform: scale(1.02);
+        }
+
+        .price-display {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Button */
+        .order-btn {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .order-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(255, 107, 107, 0.4);
+        }
+
+        .order-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 10px rgba(255,255,255,0.5)); }
+            to { filter: drop-shadow(0 0 20px rgba(255,255,255,0.8)); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .services {
+                grid-template-columns: 1fr;
+            }
+            
+            .order-section {
+                padding: 20px;
+            }
+        }
+
+        /* Floating Elements */
+        .floating {
+            position: fixed;
+            color: rgba(255,255,255,0.1);
+            font-size: 8rem;
+            z-index: -1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .float1 { top: 10%; left: 5%; animation-delay: 0s; }
+        .float2 { top: 60%; right: 10%; animation-delay: 2s; }
+        .float3 { bottom: 20%; left: 10%; animation-delay: 4s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating decorative elements -->
+    <div class="floating float1">✨</div>
+    <div class="floating float2">🎥</div>
+    <div class="floating float3">⭐</div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="logo">Thumbnail Studio</h1>
+            <p class="tagline">Professional YouTube Thumbnails | Effects | Animation | VFX</p>
+            <div class="discord-tag">
+                <i class="fab fa-discord"></i> Contact: notnaitik_1m
+            </div>
+        </header>
+
+        <!-- Services -->
+        <section class="services">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-image"></i>
+                </div>
+                <h3 class="service-title">Plain A</h3>
+                <div class="price">₹70</div>
+                <p>Basic professional thumbnail design</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-gem"></i>
+                </div>
+                <h3 class="service-title">Plain B - First Order Special</h3>
+                <div class="price">₹129</div>
+                <p class="price-special">1 High Quality Thumbnail</p>
+                <p>Limited time first order offer!</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-magic"></i>
+                </div>
+                <h3 class="service-title">Premium Pack</h3>
+                <div class="price">₹599</div>
+                <p>6 High Quality Thumbnails with Effects, Animation & VFX</p>
+            </div>
+        </section>
+
+        <!-- Order Form -->
+        <section class="order-section">
+            <h2><i class="fas fa-shopping-cart"></i> Place Your Order</h2>
+            
+            <div class="price-display" id="totalPrice">
+                Select a package to see price
+            </div>
+
+            <form id="orderForm">
+                <div class="form-group">
+                    <label>Your Name</label>
+                    <input type="text" id="customerName" placeholder="Enter your name" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Discord ID</label>
+                    <input type="text" id="discordId" placeholder="notnaitik_1m (for contact)" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Package Selection</label>
+                    <select id="packageSelect" onchange="updatePrice()" required>
+                        <option value="">Choose your package</option>
+                        <option value="70" data-name="Plain A">Plain A - ₹70</option>
+                        <option value="129" data-name="Plain B (First Order)">Plain B - ₹129 (1 HQ Thumbnail)</option>
+                        <option value="599" data-name="Premium Pack">Premium Pack - ₹599 (6 HQ Thumbnails)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Video Title</label>
+                    <textarea rows="3" id="videoTitle" placeholder="Enter your YouTube video title" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Additional Requirements</label>
+                    <textarea rows="4" id="requirements" placeholder="Colors, style, text, images you want etc..."></textarea>
+                </div>
+
+                <button type="submit" class="order-btn">
+                    <i class="fas fa-rocket"></i> Order Now & Get Started!
+                </button>
+            </form>
+        </section>
+    </div>
+
+    <script>
+        function updatePrice() {
+            const select = document.getElementById('packageSelect');
+            const priceDisplay = document.getElementById('totalPrice');
+            const selectedOption = select.options[select.selectedIndex];
+            
+            if (select.value) {
+                priceDisplay.textContent = `${selectedOption.dataset.name} - ₹${select.value}`;
+                priceDisplay.style.background = 'linear-gradient(45deg, #00b894, #00cec9)';
+            } else {
+                priceDisplay.textContent = 'Select a package to see price';
+                priceDisplay.style.background = 'linear-gradient(45deg, #ff6b6b, #feca57)';
+            }
+        }
+
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('customerName').value,
+                discord: document.getElementById('discordId').value,
+                package: document.getElementById('packageSelect').options[document.getElementById('packageSelect').selectedIndex].dataset.name,
+                price: document.getElementById('packageSelect').value,
+                title: document.getElementById('videoTitle').value,
+                requirements: document.getElementById('requirements').value
+            };
+
+            // Simple validation
+            if (!formData.discord.includes('notnaitik_1m')) {
+                alert('Please add your Discord ID correctly for contact!');
+                return;
+            }
+
+            // Copy order details to clipboard
+            const orderText = `
+🎨 THUMBNAIL ORDER
+👤 Name: ${formData.name}
+💬 Discord: ${formData.discord}
+📦 Package: ${formData.package} (₹${formData.price})
+🎥 Video Title: ${formData.title}
+📝 Requirements: ${formData.requirements || 'None specified'}
+
+Please send this to notnaitik_1m on Discord!
+            `;
+
+            navigator.clipboard.writeText(orderText).then(() => {
+                alert('✅ Order details copied to clipboard! Paste it in Discord to notnaitik_1m to place your order!');
+            });
+        });
+
+        // Add some interactive effects
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-15px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
